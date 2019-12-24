@@ -1,0 +1,3 @@
+include ':kollectionview'
+include ':sample'
+rootProject.name='KollectionView'
