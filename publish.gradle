@@ -1,14 +1,28 @@
 apply plugin: 'maven-publish'
 
-def versionName = "0.0.1"
+def versionName = "0.0.3"
 
 publishing {
     publications {
-        bar(MavenPublication) {
-            groupId 'com.danieldisu' // Replace with group ID
+        aar(MavenPublication) {
+            groupId 'com.danieldisu'
             artifactId "kollection-view"
             version versionName
             artifact("$buildDir/outputs/aar/kollectionview-release.aar")
+
+            pom.withXml {
+                def dependencies = asNode().appendNode('dependencies')
+                configurations
+                        .getByName("releaseCompileClasspath")
+                        .getResolvedConfiguration()
+                        .getFirstLevelModuleDependencies()
+                        .each {
+                            def dependency = dependencies.appendNode('dependency')
+                            dependency.appendNode('groupId', it.moduleGroup)
+                            dependency.appendNode('artifactId', it.moduleName)
+                            dependency.appendNode('version', it.moduleVersion)
+                        }
+            }
         }
     }
 
