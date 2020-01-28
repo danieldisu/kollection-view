@@ -12,8 +12,7 @@ the changes in the list.
 This library is only uploaded to the GitHub registry:
 
 ```
-implementation("com.danieldisu:kollection-view:0.0.1")
-implementation "androidx.recyclerview:recyclerview:1.1.0"
+implementation("com.danieldisu:kollection-view:0.0.3")
 ```
 
 ```
